@@ -4,6 +4,22 @@ import com.sun.javaws.exceptions.InvalidArgumentException
 
 data class User(val id: Int, val name: String)
 
+fun add(x: Int, y: Int) = x + y
+
+typealias homeDetails = Map<String, String>
+
+fun checking(x: String) = "hello " + x
+
+var change: ((String) -> (String)) = { x -> checking(x) }
+
+fun doOp(x: String, b: (String) -> (String)): (String) -> (Int) {
+  val res = b.invoke(x)
+  println("First result is $res")
+  return { anotherStr -> (anotherStr + res).length }
+}
+
+val predicate: ((((String) -> (String)), String) -> Boolean) = { c, s -> (c.invoke(s)).length > 3 }
+
 fun main(args: Array<String>) {
   val name = "iranna"
   println("Hello ${name}, Welcome to kotlin")
@@ -35,3 +51,5 @@ fun cal(x: Int, y: Int, op: String) = when (op) {
   "sub" -> x - y
   else -> throw InvalidArgumentException(null)
 }
+
+fun
